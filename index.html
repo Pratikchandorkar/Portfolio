@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      background: #f5f5f5;
+      color: #1f2937;
+      transition: 0.3s;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body.dark {
+      background: #0f172a;
+      color: #f3f4f6;
+    }
+
+    /* Floating geometric shapes */
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.2;
+      z-index: -1;
+      animation: float 20s linear infinite;
+    }
+
+    .shape.triangle {
+      width: 30px;
+      height: 30px;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      background: #3b82f6;
+    }
+
+    .shape.circle {
+      width: 40px;
+      height: 40px;
+      background: #2563eb;
+      border-radius: 50%;
+    }
+
+    .shape.square {
+      width: 25px;
+      height: 25px;
+      background: #60a5fa;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-50px) rotate(180deg);
+      }
+
+      100% {
+        transform: translateY(0) rotate(360deg);
+      }
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      border-radius: 0 0 15px 15px;
+      transition: 0.3s;
+    }
+
+    nav.light {
+      background: rgba(255, 255, 255, 0.85);
+      color: #1f2937;
+    }
+
+    nav.dark {
+      background: rgba(30, 41, 59, 0.85);
+      color: #f3f4f6;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.7em;
+      background: linear-gradient(45deg, #2563eb, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1em;
+      color: inherit;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(45deg, #2563eb, #3b82f6);
+      transition: width 0.3s;
+      border-radius: 2px;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    nav ul li a:hover {
+      color: #615959d8;
+    }
+
+    .toggle-btn {
+      background: linear-gradient(45deg, #2563eb, #3b82f6);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background: linear-gradient(45deg, #3b82f6, #60a5fa);
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 150px 20px 80px 20px;
+    }
+
+    header h1 {
+      font-size: 3em;
+      background: linear-gradient(45deg, #2563eb, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p.title {
+      font-size: 1.5em;
+      margin: 10px 0;
+      color: #1f2937;
+    }
+
+    body.dark header p.title {
+      color: #f3f4f6;
+    }
+
+    header p.subtitle {
+      font-size: 1.1em;
+      max-width: 650px;
+      margin: auto;
+      color: #4b5563;
+    }
+
+    body.dark header p.subtitle {
+      color: #d1d5db;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2em;
+    }
+
+    h2::after {
+      content: '';
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      display: block;
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
+
+    body.dark h2::after {
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    }
+
+    /* About */
+    #about p {
+      max-width: 750px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    /* Professional Info */
+    .info-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .info-cards .card {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      flex: 1 1 280px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: 0.4s;
+      transform: translateY(50px);
+      opacity: 0;
+    }
+
+    .info-cards .card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .info-cards .card:hover {
+      transform: scale(1.08) translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-cards .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.3em;
+    }
+
+    .info-cards .card p {
+      font-size: 1em;
+      line-height: 1.5;
+    }
+
+    /* Projects */
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .project {
+      perspective: 1000px;
+      flex: 1 1 280px;
+      margin-bottom: 20px;
+    }
+
+    .card-project {
+      width: 100%;
+      height: 220px;
+      border-radius: 15px;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .project:hover .card-project {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-front h3 {
+      font-weight: 700;
+    }
+
+    .card-front {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background: #2563eb;
+      color: #fff;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .card-back a {
+      margin-top: 10px;
+      display: inline-block;
+      background: linear-gradient(45deg, #3b82f6, #60a5fa);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+
+    .card-back a:hover {
+      background: linear-gradient(45deg, #60a5fa, #3b82f6);
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.6s;
+    }
+
+    .skills.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .skill:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Contact */
+    #contact p {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #contact a {
+      color: #2563eb;
+      transition: 0.3s;
+    }
+
+    #contact a:hover {
+      color: #3b82f6;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111827;
+      color: #fff;
+      border-radius: 20px 20px 0 0;
+    }
+
+    /* Back-to-top button */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 10px 15px;
+      background: linear-gradient(45deg, #2563eb, #3b82f6);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      display: none;
+      z-index: 200;
+      transition: 0.3s;
+    }
+
+    #backToTop:hover {
+      background: linear-gradient(45deg, #3b82f6, #60a5fa);
+    }
+
+    /* Responsive */
+    @media (max-width:768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .info-cards,
+      .projects,
+      .skills {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Shapes -->
+  <div class="shape circle" style="top:10%; left:15%; animation-duration:25s;"></div>
+  <div class="shape triangle" style="top:40%; left:80%; animation-duration:30s;"></div>
+  <div class="shape square" style="top:70%; left:30%; animation-duration:20s;"></div>
+  <div class="shape circle" style="top:20%; left:60%; animation-duration:28s;"></div>
+  <div class="shape triangle" style="top:60%; left:10%; animation-duration:35s;"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="light">
+    <div class="logo">Portfolio</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Pratik Chandorkar</h1>
+    <p class="title">Java & Spring Boot Developer</p>
+    <p class="subtitle">Enterprise Backend Development And Secure Authentication & Scalable Architecture</p>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Ambitious Java Software Developer and a solid foundation in Software Development
+      Life Cycle (SDLC). Technically proficient in developing Full-Stack Applications using Java, Spring Boot, and
+      RESTful APIs. Expertise in Database Management with MySQL, and MongoDB. Skilled in Data Visualization and System
+      Troubleshooting. Proven ability to write clean, scalable, and optimized code following Object-Oriented (OOP)
+      design patterns.</p>
+  </section>
+
+  <!-- Professional Info -->
+  <section id="profile">
+    <h2>Professional Info</h2>
+    <div class="info-cards">
+      <div class="card">
+        <h3>Profile Summary</h3>
+        <p>Results-driven Java Developer with strong knowledge of Java, OOP, Data Structures, and backend development.
+          Hands-on experience building secure and scalable applications using Spring Boot, REST APIs, JPA/Hibernate,
+          MySQL, and Spring Security. Proficient in Git and Maven with strong problem-solving skills. Seeking an
+          entry-level role to develop high-performance enterprise applications. 🚀</p>
+      </div>
+      <div class="card">
+        <h3>Core Competencies</h3>
+        <p>Java Development, Spring Boot, REST API Development, Spring Security, JPA/Hibernate, MySQL,MVC
+          Architecture, OOP, Git, Maven, Backend Development, Problem Solving, Debugging, Clean
+          Code Practices</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">
+        <div class="card-project">
+          <div class="card-front"><img src="/img/library.jpg" alt="Library Management">
+            <h3>Library Management</h3>
+          </div>
+          <div class="card-back">
+            <p>Spring Boot ,Spring Security (Session-based) ,Spring Data JPA / Hibernate ,MySQL,HTML, CSS, JavaScript
+              ,Thymeleaf,Maven</p><a href="https://github.com/Pratikchandorkar/library-management">View GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="project">
+        <div class="card-project">
+          <div class="card-front"><img src="/img/FitPulse.jpg" alt="FitPulse">
+            <h3>FitPulse</h3>
+          </div>
+          <div class="card-back">
+            <p>HTML, CSS, and JavaScript</p><a href="https://github.com/Pratikchandorkar/FitPulse">View GitHub</a> <a
+              href="https://pratikchandorkar.github.io/FitPulse/">Live</a>
+          </div>
+        </div>
+      </div>
+      <div class="project">
+        <div class="card-project">
+          <div class="card-front"><img src="/img/GuessMyNumber.jpg" alt="GuessMyNumber">
+            <h3>GuessMyNumber</h3>
+          </div>
+          <div class="card-back">
+            <p>HTML, CSS and JavaScript</p><a href="https://github.com/Pratikchandorkar/GuessMyNumber">View GitHub</a>
+            </p><a href="https://pratikchandorkar.github.io/GuessMyNumber/">Live</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">Java</div>
+      <div class="skill">Spring Boot</div>
+      <div class="skill">Spring Data JPA </div>
+      <div class="skill">MySQL</div>
+      <div class="skill">MongoDB</div>
+      <div class="skill">SQL</div>
+      <div class="skill">Hibernate </div>
+      <div class="skill">JDBC</div>
+      <div class="skill">REST API</div>
+      <div class="skill">Microservices</div>
+      <div class="skill">Thymeleaf</div>
+      <div class="skill">Maven</div>
+      <div class="skill">Git & GitHub</div>
+      <div class="skill">HTML/CSS/JS</div>
+      <div class="skill">Linux</div>
+      <div class="skill">Power BI</div>
+      <div class="skill">DAX</div>
+      <div class="skill">Data Modeling</div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="pratikchandorkar2000@gmail.com">pratikchandorkar2000@gmail.com</a></p>
+    <p>LinkedIn: <a
+        href="https://www.linkedin.com/in/pratik-chandorkar-327a742b5">https://www.linkedin.com/in/pratik-chandorkar-327a742b5</a>
+    </p>
+    <p>GitHub: <a href="https://github.com/Pratikchandorkar">https://github.com/Pratikchandorkar</a></p>
+  </section>
+
+  <footer>
+    
+  </footer>
+
+  <!-- Back-to-top button -->
+  <button id="backToTop" onclick="scrollToTop()">⬆ Top</button>
+
+  <script>
+    // Dark mode toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      const navbar = document.getElementById('navbar');
+      navbar.classList.toggle('dark');
+      navbar.classList.toggle('light');
+    }
+
+    // Animate info cards
+    const infoCards = document.querySelectorAll('.info-cards .card');
+    window.addEventListener('scroll', () => {
+      infoCards.forEach(c => {
+        if (c.getBoundingClientRect().top < window.innerHeight - 100) c.classList.add('visible');
+      });
+    });
+
+    // Animate skills
+    const skills = document.querySelector('.skills');
+    window.addEventListener('scroll', () => {
+      if (skills.getBoundingClientRect().top < window.innerHeight - 100) skills.classList.add('visible');
+    });
+
+    // Back-to-top button
+    const backBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backBtn.style.display = 'block';
+      else backBtn.style.display = 'none';
+    });
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  </script>
+
+</body>
+
+</html>
