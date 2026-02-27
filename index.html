@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <meta name="description" content="Portfolio of Pratik Chandorkar, Java & Spring Boot Developer">
+  <meta name="keywords" content="Java, Spring Boot, Developer, Portfolio, Backend">
+  <title>Pratik Chandorkar | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Reset */
@@ -37,6 +39,7 @@
       opacity: 0.2;
       z-index: -1;
       animation: float 20s linear infinite;
+      will-change: transform;
     }
 
     .shape.triangle {
@@ -157,6 +160,36 @@
       background: linear-gradient(45deg, #3b82f6, #60a5fa);
     }
 
+    /* Mobile Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: currentColor;
+      transition: 0.3s;
+    }
+
+    nav ul.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 50px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px 20px;
+      border-radius: 12px;
+    }
+
+    body.dark nav ul.active {
+      background: rgba(30, 41, 59, 0.95);
+    }
+
     /* Header */
     header {
       text-align: center;
@@ -196,6 +229,7 @@
       padding: 80px 20px;
       max-width: 1000px;
       margin: auto;
+      scroll-margin-top: 80px;
     }
 
     h2 {
@@ -286,6 +320,7 @@
       transition: transform 0.8s;
       transform-style: preserve-3d;
       cursor: pointer;
+      position: relative;
     }
 
     .project:hover .card-project {
@@ -340,6 +375,7 @@
       padding: 6px 12px;
       border-radius: 30px;
       transition: 0.3s;
+      text-decoration: none;
     }
 
     .card-back a:hover {
@@ -385,6 +421,7 @@
     #contact a {
       color: #2563eb;
       transition: 0.3s;
+      text-decoration: none;
     }
 
     #contact a:hover {
@@ -422,10 +459,26 @@
     }
 
     /* Responsive */
-    @media (max-width:768px) {
+
+      @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            /* Consider adding a mobile menu later */
+        }
+    /* @media (max-width:768px) {
       nav ul {
-        flex-direction: column;
+        display: none;
         gap: 10px;
+      }
+
+      .hamburger {
+        display: flex;
       }
 
       .info-cards,
@@ -434,7 +487,7 @@
         flex-direction: column;
         align-items: center;
       }
-    }
+    } */
   </style>
 </head>
 
@@ -450,14 +503,19 @@
   <!-- Navbar -->
   <nav id="navbar" class="light">
     <div class="logo">Portfolio</div>
-    <ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#profile">Profile</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+    <button class="toggle-btn" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
   </nav>
 
   <!-- Header -->
@@ -490,7 +548,7 @@
       </div>
       <div class="card">
         <h3>Core Competencies</h3>
-        <p>Java Development, Spring Boot, REST API Development, Spring Security, JPA/Hibernate, MySQL,MVC
+        <p>Java Development, Spring Boot, REST API Development, Spring Security, JPA/Hibernate, MySQL, MVC
           Architecture, OOP, Git, Maven, Backend Development, Problem Solving, Debugging, Clean
           Code Practices</p>
       </div>
@@ -503,34 +561,47 @@
     <div class="projects">
       <div class="project">
         <div class="card-project">
-          <div class="card-front"><img src="./img/library.jpg" alt="Library Management">
+          <div class="card-front"><img src="/img/library.jpg" alt="Library Management">
             <h3>Library Management</h3>
           </div>
           <div class="card-back">
-            <p>Spring Boot ,Spring Security (Session-based) ,Spring Data JPA / Hibernate ,MySQL,HTML, CSS, JavaScript
-              ,Thymeleaf,Maven</p><a href="https://github.com/Pratikchandorkar/library-management">View GitHub</a>
+            <p>Spring Boot, Spring Security (Session-based), Spring Data JPA / Hibernate, MySQL, HTML, CSS, JavaScript, Thymeleaf, Maven</p>
+            <a href="https://github.com/Pratikchandorkar/library-management" target="_blank">View GitHub</a>
           </div>
         </div>
       </div>
       <div class="project">
         <div class="card-project">
-          <div class="card-front"><img src="./img/FitPulse.jpg" alt="FitPulse">
+          <div class="card-front"><img src="/img/task.jpg" alt="Task Manager">
+            <h3>Task Manager</h3>
+          </div>
+          <div class="card-back">
+            <p>Spring Boot, Spring Security OAuth2, Spring Security (Session-based), Spring Data JPA / Hibernate, H2 Database, HTML, CSS, JavaScript, Thymeleaf, Maven</p>
+            <a href="https://github.com/Pratikchandorkar/task_manager" target="_blank">View GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="project">
+        <div class="card-project">
+          <div class="card-front"><img src="/img/FitPulse.jpg" alt="FitPulse">
             <h3>FitPulse</h3>
           </div>
           <div class="card-back">
-            <p>HTML, CSS, and JavaScript</p><a href="https://github.com/Pratikchandorkar/FitPulse">View GitHub</a> <a
-              href="https://pratikchandorkar.github.io/FitPulse/">Live</a>
+            <p>HTML, CSS, JavaScript</p>
+            <a href="https://github.com/Pratikchandorkar/FitPulse" target="_blank">View GitHub</a>
+            <a href="https://pratikchandorkar.github.io/FitPulse/" target="_blank">Live</a>
           </div>
         </div>
       </div>
       <div class="project">
         <div class="card-project">
-          <div class="card-front"><img src="./img/GuessMyNumber.jpg" alt="GuessMyNumber">
+          <div class="card-front"><img src="/img/GuessMyNumber.jpg" alt="GuessMyNumber">
             <h3>GuessMyNumber</h3>
           </div>
           <div class="card-back">
-            <p>HTML, CSS and JavaScript</p><a href="https://github.com/Pratikchandorkar/GuessMyNumber">View GitHub</a>
-            </p><a href="https://pratikchandorkar.github.io/GuessMyNumber/">Live</a>
+            <p>HTML, CSS, JavaScript, DOM Manipulation & Logic</p>
+            <a href="https://github.com/Pratikchandorkar/GuessMyNumber" target="_blank">View GitHub</a>
+            <a href="https://pratikchandorkar.github.io/GuessMyNumber/" target="_blank">Live</a>
           </div>
         </div>
       </div>
@@ -543,11 +614,12 @@
     <div class="skills">
       <div class="skill">Java</div>
       <div class="skill">Spring Boot</div>
-      <div class="skill">Spring Data JPA </div>
+      <div class="skill">Spring Data JPA</div>
+      <div class="skill">Spring Security (JWT, OAuth2)</div>
       <div class="skill">MySQL</div>
       <div class="skill">MongoDB</div>
       <div class="skill">SQL</div>
-      <div class="skill">Hibernate </div>
+      <div class="skill">Hibernate</div>
       <div class="skill">JDBC</div>
       <div class="skill">REST API</div>
       <div class="skill">Microservices</div>
@@ -565,27 +637,28 @@
   <!-- Contact -->
   <section id="contact">
     <h2>Contact Me</h2>
-    <p>Email: <a href="pratikchandorkar2000@gmail.com">pratikchandorkar2000@gmail.com</a></p>
-    <p>LinkedIn: <a
-        href="https://www.linkedin.com/in/pratik-chandorkar-327a742b5">https://www.linkedin.com/in/pratik-chandorkar-327a742b5</a>
-    </p>
-    <p>GitHub: <a href="https://github.com/Pratikchandorkar">https://github.com/Pratikchandorkar</a></p>
+    <p>Email: <a href="mailto:pratikchandorkar2000@gmail.com">pratikchandorkar2000@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/pratik-chandorkar-327a742b5" target="_blank">linkedin.com/in/pratik-chandorkar</a></p>
+    <p>GitHub: <a href="https://github.com/Pratikchandorkar" target="_blank">github.com/Pratikchandorkar</a></p>
   </section>
 
   <footer>
-    
+    © Copyright Portfolio | All Right Reserve
   </footer>
 
   <!-- Back-to-top button -->
-  <button id="backToTop" onclick="scrollToTop()">⬆ Top</button>
+  <button id="backToTop" onclick="scrollToTop()" aria-label="Scroll to top">⬆ Top</button>
 
   <script>
     // Dark mode toggle
     function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-      const navbar = document.getElementById('navbar');
-      navbar.classList.toggle('dark');
-      navbar.classList.toggle('light');
+      const isDark = document.body.classList.toggle('dark');
+            const navbar = document.getElementById('navbar');
+            const btn = document.querySelector('.toggle-btn');
+
+            navbar.classList.toggle('dark', isDark);
+            navbar.classList.toggle('light', !isDark);
+            btn.textContent = isDark ? '☀️' : '🌙';
     }
 
     // Animate info cards
@@ -609,9 +682,14 @@
       else backBtn.style.display = 'none';
     });
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
   </script>
-
 </body>
-
 
 </html>
