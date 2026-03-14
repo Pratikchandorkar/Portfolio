@@ -213,9 +213,41 @@ footer{padding:26px 5.5%;border-top:1px solid rgba(249,115,22,.08);display:flex;
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#f97316,#f43f5e);border-radius:2px}
 ::selection{background:rgba(249,115,22,.28);color:#fed7aa}
 
-@media(max-width:900px){.about-grid,.ct-grid{grid-template-columns:1fr;gap:44px}.about-cards{flex-direction:row;flex-wrap:wrap}.ac{flex:1;min-width:120x}.cursor-dot,.cursor-ring{display:none}}
-@media(max-width:600px){.tabs{gap:2px;padding:5px}.tab{padding:7px 4px;font-size:9.5px}.tab svg{width:16px;height:16px}.h-btns{flex-direction:column}.btn{justify-content:center}.about-cards{flex-direction:column}.flip-card{height:auto}.flip-inner{transform:none!important}.flip-face.flip-back{position:static;transform:none;backface-visibility:visible;border-radius:0 0 22px 22px;border-top:1px solid var(--b)}.flip-face.flip-front{position:static;transform:none;backface-visibility:visible;border-radius:22px 22px 0 0;border-bottom:none}}
-@media(max-width:480px){footer{flex-direction:column;text-align:center}}
+/* -----------------------
+   Mobile / Small screens
+   ----------------------- */
+@media (max-width:900px){
+  :root{--gap:4.5%}
+  .about-grid,.ct-grid{grid-template-columns:1fr;gap:28px}.about-cards{flex-direction:row;flex-wrap:wrap}.ac{flex:1;min-width:120px}
+  .cursor-dot,.cursor-ring{display:none}
+  .tab{font-size:10px;padding:10px 8px}
+}
+@media (max-width:600px){
+  :root{--tab-h:64px;--gap:6%}
+  body{padding-bottom:var(--tab-h)}
+  .hero-name{font-size:clamp(28px,10vw,48px)}
+  .hero-role{font-size:13px}
+  .about-bio{font-size:14px}
+  .tabs{max-width:720px;padding:6px}
+  .tabs{gap:4px}
+  .tab{padding:12px 8px}
+  .flip-inner{transform:none!important}
+  .flip-face.flip-back{position:static;transform:none;backface-visibility:visible;border-radius:0 0 18px 18px;border-top:1px solid var(--b)}
+  .flip-face.flip-front{position:static;transform:none;backface-visibility:visible;border-radius:18px 18px 0 0;border-bottom:none}
+  .pj{padding:18px;border-radius:16px}
+  .pj-title{font-size:16px}
+  .pj-desc{font-size:13px}
+  .form{padding:18px}
+  .sbtn{padding:10px}
+  .orb.o1,.orb.o2,.orb.o3{display:none}
+}
+@media (max-width:420px){
+  .about-bio{font-size:13px}
+  .pill{padding:6px 12px;font-size:11px}
+  .tabs{padding:4px}
+  .tab{font-size:10px}
+  .ft-r{gap:10px}
+}
 </style>
 </head>
 <body>
